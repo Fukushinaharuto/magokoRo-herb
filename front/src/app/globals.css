@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-pink: #E5D4D4;
+  --color-yellow: #F8FF72;
+  --color-white: #FFFFFF;
+  --color-text: #3A3A3A;
+  --color-black: #333333;
+  --color-bg: #767676;
+  --color-accent: #72FFFF;
+  --color-shocking-pink: #FF4CFF;
+  --color-gray: #E7E7E7;
+  --color-blue: #D4E3E5;
+  --color-cream: #FFFCF3;
+  --color-purple: #7415DA;
+
+  --text-10: 0.625rem;
+  --text-14: 0.875rem;   
+  --text-16: 1rem;
+  --text-20: 1.25rem;
+  --text-24: 1.5rem;
+  --text-36: 2.25rem; 
+  --text-64: 4rem;
+
+  --text-shadow-lg: 0 4px 4px rgba(0, 0, 0, 0.25);
+  --text-shadow-lg: 0 4px 4px rgba(255, 255, 255, 0.25);
+  --shadow-box-xl: 0 0 5px rgba(0, 0, 0, 0.8);
+  --shadow-box-2xl: 0 0 10px rgba(0, 0, 0, 0.8);
+  --shadow-box-3xl: 0 0 20px rgba(0, 0, 0, 1);
+  --shadow-drop-xl: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  --shadow-drop-2xl: 4px 4px 10px rgba(255, 255, 255, 0.6);
+  
+
+}
