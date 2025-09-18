@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export function RankingCard(){
     return(
-        <div className="bg-pink rounded-3xl max-w-4xl w-full shadow-drop-2xl hover:scale-103 hover:shadow-box-3xl">
+        <div className="bg-pink rounded-3xl max-w-4xl w-full shadow-drop-2xl hover:scale-103 hover:shadow-none">
             <div className="grid grid-cols-2 gap-4 p-5">
                 <div className="p-8 text-16">
                     <p>No.100 / BLEND</p>
@@ -26,7 +26,7 @@ export function RankingCard(){
                         </ul>
                     </div>
                 </div>
-                <div className="w-full h-full rounded-xl bg-gray flex justify-center items-center">
+                <div className="w-full h-full rounded-xl bg-white flex justify-center items-center">
                     <div className="relative w-[80%] h-[80%]">
                         <Image
                             src="/herb.png"
@@ -37,7 +37,6 @@ export function RankingCard(){
                         />
                     </div>
                 </div>
-
             </div>
         </div>
     )
