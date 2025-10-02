@@ -1,8 +1,27 @@
+"use client"
 import { Button } from "@/components/layout/Button"
-import { ListItem } from "@/components/feature/list-item"
+import { Product } from "@/components/feature/product"
 import { H1 } from "@/components/layout/H1"
+import { useState } from "react";
 
 export default function Page() {
+
+    const productData = {
+        number: 100,
+        type: "BLEND",
+        name: "胃腸Careブレンド",
+        color: "bg-pink",
+        url: "/herb.png",
+        price: 600
+    };
+
+
+
+
+
+
+    const [favorites, setFavorites] = useState([productData])
+
     return( 
         <div className="mt-[70px]">
             <H1
@@ -23,12 +42,12 @@ export default function Page() {
             </div>
             <div className="flex justify-center mt-20"> 
                 <div className="max-w-5xl w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <ListItem 
-                        id="No.100 / BLEND"
-                        name="胃腸Careブレンド"
-                        price={600}
-                        url="/herb.png"
-                    />
+                    {favorites.map((favorite, index) => (
+                        <Product
+                            key={index}
+                            {...favorite}
+                        />
+                    ))}  
                     
                 </div>
             </div>

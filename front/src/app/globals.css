@@ -2,16 +2,17 @@
 
 
 @theme {
-  --color-pink: #E5D4D4;
+  --color-pink: #F2D0D0;
   --color-yellow: #F8FF72;
   --color-white: #FFFFFF;
   --color-text: #434343;
   --color-black: #333333;
   --color-bg: #C2C2C2;
+  --color-cart: #E3E3E3;
   --color-accent: #72FFFF;
   --color-shocking-pink: #FF4CFF;
   --color-gray: #E7E7E7;
-  --color-blue: #D4E3E5;
+  --color-blue: #D0E4F2;
   --color-cream: #FFFCF3;
   --color-purple: #7415DA;
   --color-placeholder: #ADAAAA;
@@ -21,6 +22,7 @@
   --text-16: 1rem;
   --text-20: 1.25rem;
   --text-24: 1.5rem;
+  --text-30: 1.875rem;
   --text-36: 2.25rem; 
   --text-40: 2.5rem;
   --text-64: 4rem;
@@ -40,4 +42,16 @@
     1px  1px 0 #000;
   
 
+}
+.trim-both {
+  text-box-trim: trim-both;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: black !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

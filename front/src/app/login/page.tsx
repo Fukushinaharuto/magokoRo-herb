@@ -3,22 +3,45 @@
 import { useForm } from "react-hook-form";
 import { H1 } from "@/components/layout/H1";
 import { Button } from "@/components/layout/Button";
+import { UserLogin, UesrLoginRequest } from "@/api/user-login";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { Input } from "@/components/layout/Input";
 
-type FormData = {
-    email: string;
-    password: string;
-};
 
 export default function Page() {
-    
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
+    const router = useRouter();
+    const { register, handleSubmit, setError, formState: { errors }} = useForm<UesrLoginRequest>();
+    
+    const onSubmit = (req: UesrLoginRequest) => {
+        UserLogin(req).then(( data ) => {
+            if(data.success){
+                Cookies.set("authToken", data.authToken, { expires: 7, secure: true, sameSite: "strict" });
+                router.push('/top'); 
+            } else {
+                if (data.type === "validation"){
+                    Object.entries(data.errors).forEach(([type, messages]) => {
+                        setError(type as "email" | "password", {
+                            message: (messages as string[])[0],
+                        });                    
+                    });
+                } else if (data.type === "email"){
+                    setError("email", {
+                        message: (data.messages as string[])[0],
+                    }); 
+                } else if (data.type === "password"){
+                    setError("password", {
+                        message: (data.messages as string[])[0],
+                    }); 
+                }
+                
+            }
+        });
     };
 
     return(
-        <div className="relative mt-[60px] flex justify-center w-full h-full" style={{ backgroundImage: "url('/top.jpg')" }}>
+        <div className="relative pt-[60px]  flex justify-center w-full h-screen" style={{ backgroundImage: "url('/top.jpg')" }}>
             <div className="absolute inset-0 bg-[#333333]/70 backdrop-blur-[10px]" />
             
             <div className="border-2 border-white max-w-4xl w-full text-center my-10 z-10">
@@ -30,29 +53,31 @@ export default function Page() {
                 />
                 <form onSubmit={handleSubmit(onSubmit)} className="text-white text-24 mt-5 px-[22%]">
                     <div className="text-shadow-outline">
-                        <div>
-                            <label htmlFor="email" className="block text-left">Email <span className="text-16">/ メールアドレス<span className="text-shocking-pink">*</span></span></label>
-                            <input
-                                className="bg-white w-full placeholder:text-placeholder text-black text-16 py-2 px-5 border-2 border-gray focus:border-black focus:outline-none"
-                                id="email"
-                                {...register("email")}
-                                type="email"
-                                placeholder="例）Example@gmail.com"
-                            />
-                        </div>
-                        <div className="mt-2">
-                            <label htmlFor="password" className="block text-left">Password <span className="text-16">/ パスワード<span className="text-shocking-pink">*</span></span></label>
-                            <input
-                                className="bg-white w-full placeholder:text-placeholder text-black text-16 py-2 px-5 border-2 border-gray focus:border-yellow-400 focus:outline-none"
+                        <Input
+                            labelEn="Email"
+                            labelJp="メールアドレス"
+                            required={true}
+                            id="email"
+                            type="email"
+                            placeholder="例）Example@gmail.com"
+                            register={register}
+                            errors={errors}
+                        />
+                        <div className={`${!errors.email && "mt-3"}`}>
+                            <Input
+                                labelEn="Password"
+                                labelJp="パスワード"
+                                required={true}
                                 id="password"
-                                {...register("password")}
                                 type="password"
                                 placeholder="例）Password"
+                                register={register}
+                                errors={errors}
                             />
                         </div>
                     </div>
                     
-                    <div className="my-10">
+                    <div className="my-20">
                         <Button
                             name="Login"
                             color="bg-yellow"
@@ -64,6 +89,7 @@ export default function Page() {
                             name="Register"
                             color="bg-accent"
                             url="/sign-up.svg"
+                            handleClick={() => router.push('/register')}
                         />
                     </div>
                     

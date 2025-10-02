@@ -9,6 +9,11 @@ WORKDIR /var/www/html
 # プロジェクト全体をコピー
 COPY . .
 
+RUN apt-get update && \
+    apt-get install -y git unzip libzip-dev libpq-dev && \
+    docker-php-ext-install zip pdo pdo_pgsql && \
+    docker-php-ext-enable pdo_pgsql
+
 # Composer 依存関係インストール
 RUN composer install --no-dev --optimize-autoloader
 

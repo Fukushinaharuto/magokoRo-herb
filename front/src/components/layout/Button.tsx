@@ -5,14 +5,17 @@ type Props = {
     color: string;
     url: string;
     type?: "button" | "submit";
+    imageSize?: number;
+    fontSize?: string;
+    handleClick?: () => void;
 };
 
-export function Button({ name, color, url, type="button"}: Props) {
+export function Button({ name, color, url, type="button", imageSize=35, fontSize="text-20", handleClick}: Props) {
     return (
-        <button type={type}>
+        <button type={type} onClick={handleClick}>
   <div
     className={`
-      relative inline-block text-text text-20 pl-4 pr-5 py-3 group cursor-pointer z-50
+      relative inline-block text-text ${fontSize} pl-4 pr-5 py-3 group cursor-pointer z-50
       transition-[transform,box-shadow] duration-300
       hover:scale-105
       overflow-visible
@@ -23,7 +26,7 @@ export function Button({ name, color, url, type="button"}: Props) {
 
     <div className="flex gap-3 z-10 relative">
       {name}
-      <Image src={url} alt="searchアイコン" width={35} height={35} priority />
+      <Image src={url} alt="searchアイコン" width={imageSize} height={imageSize} priority />
     </div>
 
     <div
@@ -35,7 +38,6 @@ export function Button({ name, color, url, type="button"}: Props) {
         group-hover:translate-x-0 group-hover:translate-y-0
         transition-transform duration-300
         shadow-drop-xl
-
       `}
     />
   </div>
